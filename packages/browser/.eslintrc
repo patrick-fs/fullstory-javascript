@@ -2,9 +2,11 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "env": {
-    "mocha": true
+    "mocha": true,
+    "browser": true
   },
   "rules": {
-    "comma-dangle": ["error", "only-multiline"]
+    "comma-dangle": ["error", "only-multiline"],
+    "no-underscore-dangle": "off"
   }
 }

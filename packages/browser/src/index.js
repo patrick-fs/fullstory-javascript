@@ -1,15 +1,15 @@
-const fs = () => window[window['_fs_namespace']];
+const fs = () => window[window._fs_namespace];
 
 const ensureSnippetLoaded = () => {
   const snippetLoaded = !!fs();
   if (!snippetLoaded) {
-    throw Error('FullStory is not loaded, please ensure the FullStory snippet is executed before calling FullStory API functions')
+    throw Error('FullStory is not loaded, please ensure the FullStory snippet is executed before calling FullStory API functions');
   }
   return true;
-}
+};
 
 const hasFullStoryWithFunction = (...testNames) => {
-  const functionsCreated = () => testNames.reduce((acc, current) => { return acc && fs()[current] }, true);
+  const functionsCreated = () => testNames.reduce((acc, current) => acc && fs()[current], true);
   return ensureSnippetLoaded() && functionsCreated();
 };
 
@@ -22,37 +22,18 @@ const wrapFunction = name => (...params) => {
 };
 
 const wrappedFS = ['event', 'log', 'getCurrentSessionURL', 'identify', 'setUserVars', 'consent', 'shutdown', 'restart'].reduce((acc, current) => {
-  acc[current] = wrapFunction(current)
+  acc[current] = wrapFunction(current);
   return acc;
 }, {});
 
-const event = wrappedFS.event;
-const log = wrappedFS.log;
-const getCurrentSessionURL = wrappedFS.getCurrentSessionURL;
-const identify = wrappedFS.identify;
-const setUserVars = wrappedFS.setUserVars;
-const consent = wrappedFS.consent;
-const shutdown = wrappedFS.shutdown;
-const restart = wrappedFS.restart;
-
-const isReady = () => {
-  if (ensureSnippetLoaded() && window._fs_loaded) {
-    return Promise.resolve();
-  }
-
-  const cb = fs()._fs_ready;
-
-  fs()._fs_ready = () => {
-    try {
-      if (typeof cb === 'function') {
-        cb();
-      }
-      return Promise.resolve();
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-}
+const { event } = wrappedFS;
+const { log } = wrappedFS;
+const { getCurrentSessionURL } = wrappedFS;
+const { identify } = wrappedFS;
+const { setUserVars } = wrappedFS;
+const { consent } = wrappedFS;
+const { shutdown } = wrappedFS;
+const { restart } = wrappedFS;
 
 export {
   event,
@@ -63,5 +44,4 @@ export {
   consent,
   shutdown,
   restart,
-  isReady
 };
