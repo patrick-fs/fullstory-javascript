@@ -35,6 +35,21 @@ const { consent } = wrappedFS;
 const { shutdown } = wrappedFS;
 const { restart } = wrappedFS;
 
+const isReady = () => {
+  if (ensureSnippetLoaded() && window._fs_loaded) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const poll = setInterval(() => {
+      if (window._fs_loaded) {
+        clearInterval(poll);
+        resolve();
+      }
+    });
+  });
+};
+
 export {
   event,
   log,
@@ -44,4 +59,5 @@ export {
   consent,
   shutdown,
   restart,
+  isReady
 };
