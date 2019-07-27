@@ -38,5 +38,4 @@ jobs:
           key: v1-dependencies-{{ checksum "packages/browser/package.json" }}
 
       # run tests!
-      - run: cd packages/browser
-      - run: yarn test
+      - run: cd packages/browser && yarn test
