@@ -30,8 +30,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: cd packages/browser
-      - run: yarn install
+      - run: cd packages/browser && yarn install
 
       - save_cache:
           paths:
@@ -39,4 +38,4 @@ jobs:
           key: v1-dependencies-{{ checksum "packages/browser/package.json" }}
 
       # run tests!
-      - run: yarn test
+      - run: cd packages/browser && yarn test
