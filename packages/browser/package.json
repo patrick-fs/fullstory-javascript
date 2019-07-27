@@ -9,7 +9,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "test": "npm run lint && npm run cover",
+    "test": "npm run lint && npm run test:only",
     "test:prod": "cross-env BABEL_ENV=production npm run test",
     "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
     "test:watch": "npm test -- --watch",
