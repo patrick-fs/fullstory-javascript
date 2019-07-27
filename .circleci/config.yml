@@ -9,7 +9,7 @@ executors:
       - image: circleci/node:12
     working_directory: ~/repo/packages/browser
 jobs:
-  build:
+  build-browser-sdk:
     executor: browser-executor
     docker:
       - image: circleci/node:12
@@ -34,3 +34,18 @@ jobs:
 
       # run tests!
       - run: npm test
+      - persist_to_workspace:
+          root: .
+          paths: .
+  deploy-browser-sdk:
+    executor: browser-executor
+    steps:
+      - attach_workspace:
+          at: ~/repo/packages/browser
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=123" > .npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+    
