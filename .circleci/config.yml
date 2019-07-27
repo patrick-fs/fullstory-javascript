@@ -51,4 +51,4 @@ workflows:
             - build-browser-sdk
           filters:
             branches:
-              ignore: /.*/
+              only: "master"
