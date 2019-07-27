@@ -1,6 +1,6 @@
 {
   "name": "test-fs-pub",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "test",
   "repository": "git://github.com/patrick-fs/fullstory-javascript.git",
   "homepage": "https://github.com/patrick-fs/fullstory-javascript/tree/master/packages/browser",
