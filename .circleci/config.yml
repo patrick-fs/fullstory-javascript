@@ -18,20 +18,20 @@ jobs:
 
     steps:
       - checkout
-
+      - working_directory: packages/browser/
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "packages/browser/package.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: cd packages/browser && yarn install
+      - run: yarn install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "packages/browser/package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: cd packages/browser && yarn test
+      - run: yarn test
