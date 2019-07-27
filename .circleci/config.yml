@@ -18,10 +18,6 @@ jobs:
 
     steps:
       - checkout
-      - run: pwd
-      - run: ls -al
-      - run: cat packages/browser/package.json
-        
 
       # Download and cache dependencies
       - restore_cache:
