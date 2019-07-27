@@ -1,22 +1,23 @@
-# Javascript Node CircleCI 2.0 configuration file 
+# Javascript Node CircleCI 2.1 configuration file
+
 #
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# Check https://circleci.com/docs/2.1/language-javascript/ for more details
 #
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  browser-executor:
     docker:
       - image: circleci/node:12
     working_directory: ~/repo/packages/browser
-
+jobs:
+  build-browser-sdk:
+    executor: browser-executor
     steps:
       - checkout:
           path: ~/repo
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run: npm install
@@ -26,5 +27,29 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
       - run: npm test
+      - persist_to_workspace:
+          root: .
+          paths: .
+  deploy-browser-sdk:
+    executor: browser-executor
+    steps:
+      - attach_workspace:
+          at: ~/repo/packages/browser
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build-browser-sdk
+      - deploy-browser-sdk:
+          requires:
+            - build-browser-sdk
+          filters:
+            branches:
+              only: "master"
