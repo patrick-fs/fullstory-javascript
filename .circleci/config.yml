@@ -49,3 +49,6 @@ workflows:
       - deploy-browser-sdk:
           requires:
             - build-browser-sdk
+          filters:
+            branches:
+              ignore: /.*/
