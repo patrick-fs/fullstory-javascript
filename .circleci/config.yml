@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout
-
+      - run: pwd
       - run: ls -al
         
 
