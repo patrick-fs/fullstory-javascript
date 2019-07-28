@@ -17,7 +17,7 @@ const wrapFunction = name => (...params) => {
   if (hasFullStoryWithFunction(name)) {
     return fs()[name](...params);
   }
-  console.warn(`FS.${name} not ready`);
+  console.warn(`FS.${name} not ready`); // eslint-disable-line no-console
   return null;
 };
 
