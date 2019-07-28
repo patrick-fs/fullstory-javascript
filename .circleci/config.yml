@@ -15,14 +15,20 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install
+          command: npm install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: npm test
+      - run:
+          name: Audit
+          command: npm audit
+      - run:
+          name: Test
+          command: npm test
       - persist_to_workspace:
           root: .
           paths: .
