@@ -9,12 +9,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "test": "npm run lint && npm run cover",
+    "test": "npm run lint && npm run test:karma",
     "test:karma": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
-    "test:prod": "cross-env BABEL_ENV=production npm run test",
-    "test:only": "mocha --require @babel/register --require @babel/polyfill --recursive",
-    "test:watch": "npm test -- --watch",
-    "cover": "nyc npm run test:karma",
     "lint": "eslint src test",
     "build": "cross-env BABEL_ENV=production babel src --out-dir dist",
     "prepublish": "npm run clean && npm run test && npm run build"
@@ -47,7 +43,6 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^4.0.2",
     "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
     "rimraf": "^2.6.2",
     "webpack": "^4.38.0"
   },
