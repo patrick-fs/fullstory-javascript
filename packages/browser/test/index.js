@@ -1,3 +1,4 @@
+import { assert } from 'chai';
 import * as FullStory from '../src';
 
 describe('core', () => {
