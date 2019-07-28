@@ -2,7 +2,7 @@ version: 2.1
 executors:
   browser-executor:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:12-browsers
     working_directory: ~/repo/packages/browser
 jobs:
   build-browser-sdk:
