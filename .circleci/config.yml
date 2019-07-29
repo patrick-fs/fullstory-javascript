@@ -24,7 +24,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Audit
-          command: npm audit --audit-level=moderate
+          command: npm audit --audit-level=low
       - run:
           name: Test
           command: npm test
