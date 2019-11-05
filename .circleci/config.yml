@@ -55,7 +55,7 @@ workflows:
               only: "master"
       - deploy-browser-sdk:
           requires:
-            - build-browser-sdk
+            - hold
           filters:
             branches:
               only: "master"
