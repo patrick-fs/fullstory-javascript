@@ -1,3 +1,8 @@
+references:
+  filters: &masterBranchOnly
+    branches:
+      only: "master"
+
 version: 2.1
 executors:
   browser-executor:
@@ -49,13 +54,9 @@ workflows:
       - hold:
           type: approval
           requires:
-           - build-browser-sdk
-          filters:
-            branches:
-              only: "master"
+            - build-browser-sdk
+          <<: *masterBranchOnly
       - deploy-browser-sdk:
           requires:
             - hold
-          filters:
-            branches:
-              only: "master"
+          <<: *masterBranchOnly
