@@ -3,13 +3,12 @@ executors:
   browser-executor:
     docker:
       - image: circleci/node:12-browsers
-    working_directory: ~/repo/packages/browser
+    working_directory: ~/repo
 jobs:
   build-browser-sdk:
     executor: browser-executor
     steps:
-      - checkout:
-          path: ~/repo
+      - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -35,7 +34,7 @@ jobs:
     executor: browser-executor
     steps:
       - attach_workspace:
-          at: ~/repo/packages/browser
+          at: ~/repo
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
