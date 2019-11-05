@@ -50,7 +50,7 @@ workflows:
           type: approval
           requires:
            - build-browser-sdk
-           filters:
+          filters:
             branches:
               only: "master"
       - deploy-browser-sdk:
