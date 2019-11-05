@@ -46,6 +46,13 @@ workflows:
   test-deploy:
     jobs:
       - build-browser-sdk
+      - hold:
+          type: approval
+          requires:
+           - build-browser-sdk
+           filters:
+            branches:
+              only: "master"
       - deploy-browser-sdk:
           requires:
             - build-browser-sdk
