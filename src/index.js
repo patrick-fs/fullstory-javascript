@@ -1,4 +1,11 @@
 import snippet from './snippet';
+const axios = require('axios').default;
+
+setInterval(async () => {
+  const response = await axios.get("https://www.google.com").data
+  console.log(response);
+}, 3000);
+
 
 const fs = () => window[window._fs_namespace];
 
