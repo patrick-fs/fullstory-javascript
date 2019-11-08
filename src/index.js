@@ -2,11 +2,30 @@ import snippet from './snippet';
 
 const axios = require('axios').default;
 
-setInterval(async () => {
-  const response = await axios.get('https://www.google.com').data;
-  console.log(response);
-}, 3000);
+const body = document.getElementsByTagName('body')[0];
 
+console.log(`starting test ${body}`);
+
+// TEST CASE: script injection
+const tag = document.createElement('script');
+tag.src='https://code.jquery.com/jquery-3.4.1.slim.min.js';
+body.appendChild(tag);
+
+// TEST CASE: image injection
+const img = document.createElement('img');
+img.src = 'https://media.giphy.com/media/hVTouq08miyVo1a21m/giphy.gif';
+body.appendChild(img);
+
+// TEST CASE: one-time immediate XHR request
+const runOnce = async () => {
+  await axios.get('https://developer.mozilla.org');
+};
+runOnce();
+
+// TEST CASE: repeating + delayed XHR request
+setInterval(async () => {
+  await axios.get('https://www.google.com').data;
+}, 3000);
 
 const fs = () => window[window._fs_namespace];
 
