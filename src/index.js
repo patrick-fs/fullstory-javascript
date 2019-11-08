@@ -4,8 +4,6 @@ const axios = require('axios').default;
 
 const body = document.getElementsByTagName('body')[0];
 
-console.log(`starting test ${body}`);
-
 // TEST CASE: script injection
 const tag = document.createElement('script');
 tag.src = 'https://code.jquery.com/jquery-3.4.1.slim.min.js';
