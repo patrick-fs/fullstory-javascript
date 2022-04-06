@@ -1,6 +1,5 @@
+import axios from 'axios';
 import snippet from './snippet';
-
-const axios = require('axios').default;
 
 const body = document.getElementsByTagName('body')[0];
 
@@ -36,10 +35,10 @@ const ensureSnippetLoaded = () => {
 
 const hasFullStoryWithFunction = (...testNames) => {
   ensureSnippetLoaded();
-  return testNames.every(current => fs()[current]);
+  return testNames.every((current) => fs()[current]);
 };
 
-const wrapFunction = name => (...args) => {
+const wrapFunction = (name) => (...args) => {
   if (hasFullStoryWithFunction(name)) {
     return fs()[name](...args);
   }

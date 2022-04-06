@@ -24,7 +24,7 @@ describe('core', () => {
       'shutdown',
       'restart'];
 
-    functions.forEach(i => assert(typeof FullStory[i] === 'function', `${i} has not been exported from the FullStory module`));
+    functions.forEach((i) => assert(typeof FullStory[i] === 'function', `${i} has not been exported from the FullStory module`));
   });
 });
 
