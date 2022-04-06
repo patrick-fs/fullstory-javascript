@@ -62,3 +62,8 @@ workflows:
       - deploy-browser-sdk:
           requires:
             - hold
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
