@@ -46,8 +46,8 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - build-browser-sdk
-          filters:  # required since `deploy` has tag filters AND requires `build`
+      - build-browser-sdk:
+          filters:
             tags:
               only: /.*/
       - hold:
